@@ -1,28 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Task Manager</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100 min-h-screen flex items-center justify-center">
-  <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-    <h1 class="text-2xl font-bold mb-6 text-center">Task Manager</h1>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task Manager</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100 min-h-fit flex flex-col justify-center my-8 gap-6">
+    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-4xl mx-auto">
+      <h1 class="text-2xl font-bold mb-6 text-center">Task Manager</h1>
 
-    <form id="taskForm" class="flex flex-col gap-4 mb-6">
-      <input type="text" id="title" placeholder="Task Title" required class="border p-2 rounded">
-      <input type="text" id="description" placeholder="Task Description" required class="border p-2 rounded">
-      <div class="flex gap-2">
-        <button type="submit" class="bg-blue-500 text-white py-2 flex-1 rounded hover:bg-blue-600">Add Task</button>
-        <button type="button" id="cancelEdit" class="bg-gray-500 text-white py-2 flex-1 rounded hover:bg-gray-600 hidden">Cancel</button>
+      <form id="taskForm" class="flex flex-col gap-4 mb-6">
+        <input
+          type="text"
+          id="title"
+          placeholder="Task Title"
+          required
+          class="border p-2 rounded"
+        />
+        <textarea
+          type="text"
+          id="description"
+          placeholder="Task Description"
+          required
+          class="border p-2 rounded"
+        ></textarea>
+        <div class="flex gap-2">
+          <button
+            type="submit"
+            class="bg-blue-500 text-white py-2 flex-1 rounded hover:bg-blue-600"
+          >
+            Add Task
+          </button>
+          <button
+            type="button"
+            id="cancelEdit"
+            class="bg-gray-500 text-white py-2 flex-1 rounded hover:bg-gray-600 hidden"
+          >
+            Cancel
+          </button>
+        </div>
+      </form>
+
+      <div id="loading" class="text-center font-semibold hidden">
+        Loading...
       </div>
-    </form>
+    </div>
 
-    <div id="loading" class="text-center font-semibold hidden">Loading...</div>
-    <ul id="taskList" class="space-y-4"></ul>
-  </div>
-
-  <script src="app.js"></script>
-</body>
+    <div
+      class="bg-white p-8 rounded-lg shadow-md w-full max-w-4xl mx-auto peer space-y-2"
+    >
+      <div class="flex items-center justify-end space-x-2">
+        <select
+          id="sortBy"
+          onchange="fetchTasks()"
+          class="block w-full md:w-32 px-4 py-2 border-2 border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-0 focus:border-black text-sm focus:ring-0"
+          autocomplete="off"
+        >
+          <option value="" disabled selected>Sort By</option>
+          <option value="completed">Completed</option>
+          <option value="pending">Pending</option>
+        </select>
+      </div>
+      <ul id="taskList" class="space-y-4"></ul>
+    </div>
+    <script src="app.js"></script>
+  </body>
 </html>
